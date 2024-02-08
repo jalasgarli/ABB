@@ -15,9 +15,8 @@ public class Outer {
 
     public static void main(String[] args) {
         Inner inner1 = new Inner();
-        Inner inner2 = new Inner();
-        Inner inner3 = new Inner();
-
+        Inner inner2 = new Inner(); 
+//
         System.out.println(Inner.getCount());
     }
 }
