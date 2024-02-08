@@ -1,4 +1,4 @@
-package Exercise_5;
+package Exercise_5.Task_1;
 
 public interface Employee {
     public double calculateSalary();
