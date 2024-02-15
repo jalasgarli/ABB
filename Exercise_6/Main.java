@@ -18,7 +18,7 @@ public class Main {
         genericStorage.displayAllItems();
 
         System.out.println("Search item no: 1");
-        System.out.println(genericStorage.searchItem(1));
+        System.out.println(genericStorage.searchItem(4));
 
     }
 }

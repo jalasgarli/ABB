@@ -37,8 +37,7 @@ public class GenericStorage<T extends Person> {
 
     public void displayAllItems() {
         for(T item: items) {
-            System.out.println("Id: " + item.getId() + ", Name: " + item.getName() + 
-                ", Age: " + item.getAge());
+            System.out.println(item.toString());
         }
     }
 }
