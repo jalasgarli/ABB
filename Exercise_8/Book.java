@@ -37,4 +37,9 @@ public class Book {
     public void setYear(int year) {
         this.year = year;
     }
+    public String toString() {
+        return "Title: " + title + 
+            ", Author: " + author + ", Genre: " + genre 
+            + ", Year: " + year + "\n";
+    }
 }

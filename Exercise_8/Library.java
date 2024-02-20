@@ -16,6 +16,14 @@ public class Library {
         books.add(newBook);
     }
 
+    public void removeBook(Book book) {
+        if(books.contains(book)) {
+            System.out.println("Book does not exist");
+            return;
+        }
+        books.remove(book);
+    }
+
     public List<Book> searchByTitle(String title) {
         return books.stream()
                 .filter(book -> book.getTitle().equalsIgnoreCase(title))
@@ -50,5 +58,16 @@ public class Library {
         return books.stream()
             .sorted(Comparator.comparingInt(Book::getYear))
             .collect(Collectors.toList());
+    }
+
+    public double averagePublicationYear() {
+        return books.stream()
+                .mapToInt(Book::getYear)
+                .average()
+                .orElse(0);
+    }
+
+    public int numberOfBooks() {
+        return books.size();
     }
 }
