@@ -8,13 +8,14 @@ public class Main {
 
         while (true) {
             try {
+                System.out.print("Number: ");
                 int number = scanner.nextInt();
                 int square = number * number;
                 System.out.println("Square of " + number + " is " + square);
                 break;
             } catch(Exception exception) {
-                
                 System.out.println("Invalid number!");
+                scanner.nextLine();
             }
         }
         
