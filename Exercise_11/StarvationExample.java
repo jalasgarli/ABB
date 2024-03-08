@@ -1,44 +1,37 @@
 package Exercise_11;
+import java.util.concurrent.locks.ReentrantLock;
 
-// Java program to illustrate Starvation concept
-class StarvationExample extends Thread {
-	static int threadcount = 1;
-	public void run()
-	{
-		System.out.println(threadcount + "st Child" + 
-							" Thread execution starts");
-		System.out.println("Child thread execution completes");
-		threadcount++;
-	}
-	public static void main(String[] args) 
-			throws InterruptedException
-	{
-		System.out.println("Main thread execution starts");
+class StarvationExample {
+	static class Worker {
+        private String name;
+        private ReentrantLock lock;
+        public Worker(String name) {
+            this.name = name;
+            lock = new ReentrantLock();
+        }
 
-		// Thread priorities are set in a way that thread5
-		// gets least priority.
-		StarvationExample thread1 = new StarvationExample();
-		thread1.setPriority(10);
-		StarvationExample thread2 = new StarvationExample();
-		thread2.setPriority(9);
-		StarvationExample thread3 = new StarvationExample();
-		thread3.setPriority(8);
-		StarvationExample thread4 = new StarvationExample();
-		thread4.setPriority(7);
-		StarvationExample thread5 = new StarvationExample();
-		thread5.setPriority(6);
+        public void work() {
+            while (true) {
+                try {
+                    lock.lock();
+                    System.out.println(name + " is working...");
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        final Worker starvingWorker = new Worker("Starving Worker");
+        Thread starvingThread = new Thread(() -> starvingWorker.work());
+        starvingThread.start();
 
-		thread1.start();
-		thread2.start();
-		thread3.start();
-		thread4.start();
-
-		// Here thread5 have to wait because of the
-		// other thread. But after waiting for some
-		// interval, thread5 will get the chance of 
-		// execution. It is known as Starvation
-		thread5.start();
-
-		System.out.println("Main thread execution completes");
-	}
+        for (int i = 1; i <= 5; i++) {
+            final int threadNum = i;
+            Thread additionalThread = new Thread(() -> System.out.println("Additional Thread " + threadNum + " is trying to work..."));
+        }
+    }
 }

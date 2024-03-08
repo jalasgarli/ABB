@@ -1,4 +1,4 @@
-package Class_Exam;
+package Class_Exam.Class_Exam;
 
 import java.io.IOException;
 
